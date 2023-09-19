@@ -2,6 +2,7 @@ import numpy as np
 from settings import *
 from meshes.base_mesh import BaseMesh
 
+
 class QuadMesh(BaseMesh):
     def __init__(self, app):
         super().__init__()
@@ -10,18 +11,20 @@ class QuadMesh(BaseMesh):
         self.ctx = app.ctx
         self.program = app.shader_program.quad
 
-        self.vbo_format = '3f 3f'
-        self.attrs = ('in_position', 'in_color')
+        self.vbo_format = "3f 3f"
+        self.attrs = ("in_position", "in_color")
         self.vao = self.get_vao()
 
     def get_vertex_data(self):
         vertices = [
-            (0.5, 0.5, 0.0), (-0.5, 0.5, 0.0), (-0.5, -0.5, 0.0),
-            (0.5, 0.5, 0.0), (-0.5, -0.5, 0.0), (0.5, -0.5, 0.0)
+            (0.5, 0.5, 0.0),
+            (-0.5, 0.5, 0.0),
+            (-0.5, -0.5, 0.0),
+            (0.5, 0.5, 0.0),
+            (-0.5, -0.5, 0.0),
+            (0.5, -0.5, 0.0),
         ]
-        colors = [
-            (0, 1, 0), (1, 0, 0), (1, 1, 0),
-            (0, 1, 0), (1, 1, 0), (0, 0, 1)
-        ]
-        vertext_data = np.hstack([vertices, colors], dtype='float32')
+        colors = [(0, 1, 0), (1, 0, 0), (1, 1, 0), (0, 1, 0), (1, 1, 0), (0, 0, 1)]
+        vertext_data = np.hstack([vertices, colors])
+        vertext_data = vertext_data.astype("float32")
         return vertext_data
